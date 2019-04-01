@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cookie dome</title>
+    <meta name="Keywords" content="关键词,关键词">
+    <meta name="description" content="">
+
+    <script src="cookies.js"></script>
+</head>
+<body>
+    <script>
+        // pipi_cookie('cookie名字').add('cookie内容','作用域',时间1 = 1分钟);
+        // console.log(pipi_cookie('pipi').add('aaa','/',1).add());
+        // console.log(pipi_cookie('pipi').obtain());
+        let cookie = new pipi_cookie();
+        console.log(cookie.add('aaaaa','ceshi','/',1));
+        console.log(cookie.botain('aaaaa'));
+        console.log(cookie.revise('aaaaa','11111111','/',10));
+        console.log(cookie.botain('aaaaa'));
+        console.log(cookie.delete('aaaaa'));
+        console.log(cookie.botain('aaaaa'));
+    </script>
+</body>
+</html>
