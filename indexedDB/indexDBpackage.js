@@ -3,7 +3,7 @@
  * @Email: pisenliang@gmail.com
  * @LastEditors: pipi
  * @Date: 2019-05-06 16:43:50
- * @LastEditTime: 2019-05-07 10:55:15
+ * @LastEditTime: 2019-05-07 17:04:31
  */
 //检测浏览器是否支持
 if (!window.indexedDB) {
@@ -11,7 +11,7 @@ if (!window.indexedDB) {
 }
 var pipiIndexDB, pipidb;
 class indexedDBpipi {
-    databaseOpen(databaseName, version) {
+    databaseOpen(databaseName, version,tableOpenJson) {
         pipiIndexDB = window.indexedDB.open(databaseName, version);
         pipiIndexDB.onerror = event => {
             console.log('Failure');
@@ -26,18 +26,26 @@ class indexedDBpipi {
             console.log('Upgrading...');
             console.log(event);
             pipidb = event.target.result;
+            for(var a = 0;a<tableOpenJson.length;a++){
+                if (!pipidb.objectStoreNames.contains(tableOpenJson[a].name)) {
+                    pipidb.createObjectStore(tableOpenJson[a].name, { keyPath: tableOpenJson[a].key});
+                    console.log(tableOpenJson[a].name + "表创建成功");
+                } else {
+                    console.log(tableOpenJson[a].name + "表名重复");
+                }
+            }
         }
     }
-    tableOpen(name,key) {
-        if (!pipidb.objectStoreNames.contains(name)) {
-            pipidb.createObjectStore(name, { keyPath: key});
-            console.log(name + "表创建成功");
-        } else {
-            console.log(name + "表名重复");
-        }
+    add(name,key,val,onsuccess,onerror){
+        let request = pipidb.transaction([name],'readwrite').objectStore(name).add({name:key,val:val});
+        request.onsuccess = onsuccess;
+        request.onerror = onerror;
     }
-    add(){
-        
+    read(name,key){
+        var request = pipidb.transaction([name]).objectStore(name).get(key);
+        request.onsuccess = function (event){
+            
+        }
     }
 }
 
