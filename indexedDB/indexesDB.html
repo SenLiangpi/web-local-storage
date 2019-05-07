@@ -3,11 +3,12 @@
  * @Email: pisenliang@gmail.com
  * @LastEditors: pipi
  * @Date: 2019-04-02 09:36:21
- * @LastEditTime: 2019-05-04 11:16:05
+ * @LastEditTime: 2019-05-06 18:06:46
  -->
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
@@ -16,17 +17,24 @@
     <meta name="Keywords" content="关键词,关键词">
     <meta name="description" content="">
 
-    <script src="indexedDB.js"></script>
-</head>
-<body>
-    <button style="padding:100px;border: 1px solid #000;" onclick="add()">写入</button>
-    <button style="padding:100px;border: 1px solid #000;" onclick="read()">读出</button>
-    <button style="padding:100px;border: 1px solid #000;" onclick="readAll()">读出全部</button>
-    <button style="padding:100px;border: 1px solid #000;" onclick="update()">修改数据</button>
-    <button style="padding:100px;border: 1px solid #000;" onclick="remove()">删除数据</button>
+    <!-- <script src="indexedDB.js"></script> -->
 
-    
+    <script src="indexDBpackage.js"></script>
+</head>
+
+<body>
+    <!-- <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="add()">写入</button>
+    <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="read()">读出</button>
+    <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="readAll()">读出全部</button>
+    <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="update()">修改数据</button>
+    <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="remove()">删除数据</button> -->
+
+
     <script>
+        let indexDB = new indexedDBpipi();
+        indexDB.databaseOpen().onerror.onsuccess;
+        // console.log(data);
     </script>
 </body>
+
 </html>
