@@ -3,7 +3,7 @@
  * @Email: pisenliang@gmail.com
  * @LastEditors: pipi
  * @Date: 2019-04-02 09:36:21
- * @LastEditTime: 2019-05-06 18:06:46
+ * @LastEditTime: 2019-05-07 11:07:11
  -->
 
 <!DOCTYPE html>
@@ -23,6 +23,7 @@
 </head>
 
 <body>
+    <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="indexDB.tableOpen('xxx','name');">写入</button>
     <!-- <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="add()">写入</button>
     <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="read()">读出</button>
     <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="readAll()">读出全部</button>
@@ -32,8 +33,8 @@
 
     <script>
         let indexDB = new indexedDBpipi();
-        indexDB.databaseOpen().onerror.onsuccess;
-        // console.log(data);
+        indexDB.databaseOpen("pipi",3);
+        // indexDB.tableOpen('xxx','name');
     </script>
 </body>
 
