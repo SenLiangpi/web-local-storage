@@ -3,7 +3,7 @@
  * @Email: pisenliang@gmail.com
  * @LastEditors: pipi
  * @Date: 2019-05-06 16:43:50
- * @LastEditTime: 2019-05-07 17:04:31
+ * @LastEditTime: 2019-05-08 15:41:34
  */
 //检测浏览器是否支持
 if (!window.indexedDB) {
@@ -41,15 +41,25 @@ class indexedDBpipi {
         request.onsuccess = onsuccess;
         request.onerror = onerror;
     }
-    read(name,key){
+    read(name,key,onsuccess,onerror){
         var request = pipidb.transaction([name]).objectStore(name).get(key);
-        request.onsuccess = function (event){
-            
-        }
+        request.onsuccess = onsuccess;
+        request.onerror = onerror;
+    }
+    readAll(name,onsuccess,onerror){
+        var request = pipidb.transaction([name],'readonly').objectStore(name).openCursor();
+        request.onsuccess = onsuccess;
+        request.onerror = onerror;
+    }
+    update(name,key,val,onsuccess,onerror){
+        var request = pipidb.transaction([name],'readwrite').objectStore(name).put({name:key,val:val});
+        request.onsuccess = onsuccess;
+        request.onerror = onerror;
+    }
+    remove(name,key,onsuccess,onerror){
+        var request = pipidb.transaction([name],'readwrite').objectStore(name).delete(key);
+        request.onsuccess = onsuccess;
+        request.onerror = onerror;
     }
 }
 
-// function indexedDBpipi(databaseName,version){
-//     const indexDB = window.indexedDB.open("pipi",1);
-
-// }

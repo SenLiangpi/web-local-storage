@@ -3,7 +3,7 @@
  * @Email: pisenliang@gmail.com
  * @LastEditors: pipi
  * @Date: 2019-04-02 09:36:21
- * @LastEditTime: 2019-05-07 15:40:20
+ * @LastEditTime: 2019-05-08 15:23:01
  -->
 
 <!DOCTYPE html>
@@ -24,17 +24,17 @@
 
 <body>
     <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="add()">写入</button>
-    <!-- <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="read()">读出</button>
+    <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="read()">读出</button>
     <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="readAll()">读出全部</button>
     <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="update()">修改数据</button>
-    <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="remove()">删除数据</button> -->
+    <button style="padding:10px 40px;border: 1px solid #000;margin: 5px;" onclick="remove()">删除数据</button>
 
 
     <script>
         let indexDB = new indexedDBpipi();
-        indexDB.databaseOpen("pipi", 3, [{name:'a',key:'name'}]);
+        indexDB.databaseOpen("pipi", 1, [{ name: 'a', key: 'name' }]);
         function add() {
-            indexDB.add('a', 'xx', "{ a: 'a', b: 'b' }",
+            indexDB.add('a', 'xx3', "{ a: 'a', b: 'b' }",
                 event => {
                     console.log(event);
                     console.log('Success');
@@ -43,8 +43,56 @@
                     console.log('Failure');
                 })
         }
-
-        // indexDB.tableOpen('xxx','name');
+        function read() {
+            indexDB.read('a', 'xx',
+                function (event) {
+                    console.log('Success');
+                    console.log(event.target.result);
+                },
+                function (event) {
+                    console.log('Failure');
+                    console.log(event);
+                })
+        }
+        function readAll() {
+            indexDB.readAll('a',
+                function (event) {
+                    var cursor = event.target.result;
+                    if (cursor) {
+                        console.log(cursor.value);
+                        console.log('Success');
+                        cursor.continue();
+                    } else {
+                        console.log('No data');
+                    }
+                },
+                function (event) {
+                    console.log('Failure');
+                    console.log(event);
+                }
+            )
+        }
+        function update() {
+            indexDB.update("a", "xx", "{ a: 'a', b: 'b', c: 'c',d: 'd' }",
+                function (event) {
+                    console.log("Success");
+                    console.log(event);
+                },
+                function (event) {
+                    console.log('Failure');
+                    console.log(event);
+                }
+            )
+        }
+        function remove() {
+            indexDB.remove("a", "xx1", function (event) {
+                console.log("Success");
+                console.log(event);
+            }, function (event) {
+                console.log("Failure");
+                console.log(event);
+            })
+        }
     </script>
 </body>
 
