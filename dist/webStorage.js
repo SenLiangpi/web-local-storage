@@ -4,7 +4,7 @@
  * @github: https://github.com/SenLiangpi/
  * @LastEditors: pipi
  * @Date: 2019-05-08 16:30:06
- * @LastEditTime: 2019-05-09 09:04:35
+ * @LastEditTime: 2019-05-11 11:13:23
  * webStorage.js v1.0
  */
 
@@ -57,7 +57,7 @@ class pipi_localStorage {
             localStorage.setItem(name,val);
             return { success: true, message: "ok" };
         }else{
-            return { success: false, message: "cookie name repeat" };
+            return { success: false, message: "localStorage name repeat" };
         }
     }
     botain(name) {
