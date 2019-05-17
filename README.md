@@ -3,7 +3,7 @@
  * @Email: pisenliang@gmail.com
  * @LastEditors: pipi
  * @Date: 2019-04-01 14:18:20
- * @LastEditTime: 2019-05-11 14:30:33
+ * @LastEditTime: 2019-05-17 14:51:52
  -->
 
 # web本地存储解决方案
@@ -121,6 +121,93 @@ IndexedDB是一个事务型数据库系统，类似于基于SQL的RDBMS。 然�
 IndexedDB 是 WebSQL 数据库的取代品, W3C组织在2010年11月18日废弃了webSql.  IndexedDB 和WebSQL的不同点在于WebSQL 是关系型数据库（复杂）IndexedDB 是key-value型数据库（简单好使）.
 ```HTML
 <script>
-//待更新。。。。
+let indexDB = new indexedDBpipi();
+/**
+ * @description: 连接/新建数据库
+ * @param {name:数据库名,
+ *         版本
+ *         第一次新建数据库需要新建的表，只有第一次创建和版本升级时可以新建数据库} 
+ * @return: 没有返回值
+ */
+indexDB.databaseOpen("pipi", 1, [{ name: 'a', key: 'name' }]);
+/**
+ * @description: add 添加数据
+ * @param {表名,key,val,成功回调函数,失败回调函数} 
+ * @return: 返回值在回调函数接收
+ */
+indexDB.add('a', 'xx3', "{ a: 'a', b: 'b' }",
+    event => {
+        console.log(event);
+        console.log('Success');
+    }, event => {
+        console.log(event);
+        console.log('Failure');
+    }
+)
+/**
+ * @description: read 查询
+ * @param {表名,key,成功回调函数,失败回调函数} 
+ * @return: 返回值在回调函数接收
+ */
+indexDB.read('a', 'xx',
+   function (event) {
+       console.log('Success');
+       console.log(event.target.result);
+   },
+   function (event) {
+       console.log('Failure');
+       console.log(event);
+   }
+)
+/**
+ * @description: readAll 查询全部
+ * @param {表名,成功回调函数,失败回调函数} 
+ * @return: 返回值在回调函数接收
+ * 这个函数每次取出一个值会一直循环到取出所有数据
+ */
+indexDB.readAll('a',
+   function (event) {
+       var cursor = event.target.result;
+       if (cursor) {
+           console.log(cursor.value);
+           console.log('Success');
+           cursor.continue();
+       } else {
+           console.log('No data');
+       }
+   },
+   function (event) {
+       console.log('Failure');
+       console.log(event);
+   }
+)
+/**
+ * @description: update 修改
+ * @param {表名,key,val,成功回调函数,失败回调函数} 
+ * @return: 返回值在回调函数接收
+ */
+indexDB.update("a", "xx", "{ a: 'a', b: 'b', c: 'c',d: 'd' }",
+   function (event) {
+       console.log("Success");
+       console.log(event);
+   },
+   function (event) {
+       console.log('Failure');
+       console.log(event);
+   }
+)
+/**
+ * @description: remove 删除
+ * @param {表名,key,成功回调函数,失败回调函数} 
+ * @return: 返回值在回调函数接收
+ */
+indexDB.remove("a", "xx1", function (event) {
+       console.log("Success");
+       console.log(event);
+   }, function (event) {
+       console.log("Failure");
+       console.log(event);
+   }
+)
 </script>
 ```
