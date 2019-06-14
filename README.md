@@ -1,9 +1,9 @@
 <!--
  * @Author: pipi
  * @Email: pisenliang@gmail.com
- * @LastEditors: pipi
+ * @LastEditors: Please set LastEditors
  * @Date: 2019-04-01 14:18:20
- * @LastEditTime: 2019-05-17 14:51:52
+ * @LastEditTime: 2019-06-13 15:37:43
  -->
 
 # web本地存储解决方案
@@ -14,7 +14,13 @@ webStorage是一个用纯javascript的本地存储解决方案。他提供给你
 * cookies - 浏览器提供的cookies存储，可以设置时效性。
 webStorage用简单易用的方式解决本地存储。
 
-# 快速开始
+# 全局状态管理 Amx.js
+Amx.js是一个用纯JavaScript编写的全局状态管理，主要为解决页面或组件之间状态共享、管理等问题。
+支持Amx技术：
+* Storage - 浏览器提供的Storage关系型数据存储。
+* addEventListener
+
+# web本地存储解决方案 => 快速开始
 ```HTML
 <script src="/dist/webStorage.min.js"></script>
 <script>
