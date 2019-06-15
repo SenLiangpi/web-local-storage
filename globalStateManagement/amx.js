@@ -2,42 +2,34 @@ import { pipi_localStorage } from './localStorage.js'
 
 export class Amx {
   constructor(data) {
-    new pipi_localStorage.add(data.name, JSON.stringify(data.store))
+    localStorage.setItem(data.name, JSON.stringify(data.store))
   }
   read(key) {
-    var data = {}
-    var watch = {}
-    for (let a = 0; a < key.length; a++) {
-      data.key[a] = localStorage.getItem(key[0])
-      watch.key[a] = (val, oldVal)=>{
-        localStorage.setItem(key[a],JSON.stringify(val))
+    let data = {}
+    data[key] = JSON.parse(localStorage.getItem(key))
+    var watch = JSON.parse('{"'+key+'": 5}', function (k, v) {
+      if(k === '') return v;
+      return {
+        handler(val, oldVal){
+          localStorage.setItem(key,JSON.stringify(val))
+        },
+        deep:true
       }
-    }
+    });
+    console.log(watch)
     return {
-      data() {
+      data(){
         return data
       },
-      mounted (){
+      mounted(){
         window.addEventListener('storage',(e)=>{
-          console.log(e)
-          for(let a = 0; a < key.length; a++){
-            if(e.key == key[a]){
-              'this'.key[a] = JSON.parse(e.newValue)
-            }
+          if(e.key==key){
+            this[key] = JSON.parse(e.newValue)
           }
-          // this.aaa = JSON.parse(e.newValue);
         })
       },
-      watch: watch,
+      watch:watch
     }
   }
 }
-
-
-// new amx({
-//   name: '',
-//   store: {
-
-//   }
-// })
 
