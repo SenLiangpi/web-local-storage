@@ -3,7 +3,7 @@
  * @Email: pisenliang@gmail.com
  * @LastEditors: Please set LastEditors
  * @Date: 2019-04-01 14:31:42
- * @LastEditTime: 2019-06-13 14:52:20
+ * @LastEditTime: 2019-06-21 18:18:10
  */
 
  export class pipi_localStorage {
